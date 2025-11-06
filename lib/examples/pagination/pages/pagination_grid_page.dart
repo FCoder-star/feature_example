@@ -3,9 +3,8 @@ import 'package:feature_example/examples/pagination/data/app_item.dart';
 import 'package:feature_example/examples/pagination/data/fake_remote_api.dart';
 import 'package:feature_example/examples/pagination/grid/core/paged_grid.dart';
 import 'package:feature_example/examples/pagination/grid/widgets/app_item_grid_tile.dart';
+import 'package:feature_example/widgets/app_page_bar.dart';
 import 'package:flutter/material.dart';
-
-
 
 class PaginationGridPage extends StatefulWidget {
   const PaginationGridPage({super.key});
@@ -22,8 +21,13 @@ class _PaginationGridPageState extends State<PaginationGridPage>
 
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: const Text('Pagination · Grid')),
+      extendBodyBehindAppBar: true,
+      appBar: const AppPageBar(
+        title: 'Pagination · Grid',
+        // backgroundColor: Colors.transparent,
+      ),
       body: SafeArea(
         child: AppPagedGrid<int, AppItem>(
           controller: pagingController,
@@ -34,7 +38,8 @@ class _PaginationGridPageState extends State<PaginationGridPage>
             crossAxisSpacing: 12,
             childAspectRatio: 3 / 4,
           ),
-          itemBuilder: (context, item, index) => AppItemGridTile(item: item),
+          itemBuilder: (context, item, index) =>
+              AppItemGridTile(item: item),
         ),
       ),
     );

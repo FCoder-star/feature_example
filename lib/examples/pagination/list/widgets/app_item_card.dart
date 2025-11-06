@@ -26,19 +26,19 @@ class AppItemCard extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                cs.surface.withValues(alpha: 0.96),
-                cs.surfaceContainerHighest.withValues(alpha: 0.85),
+                cs.surface.withValues(alpha: 0.98),
+                cs.primary.withValues(alpha: 0.06),
               ],
             ),
             border: Border.all(
-              color: cs.outlineVariant.withValues(alpha: 0.6),
-              width: 1,
+              color: cs.outlineVariant.withValues(alpha: 0.9),
+              width: 1.2,
             ),
             boxShadow: [
               BoxShadow(
-                color: cs.shadow.withValues(alpha: 0.05),
-                blurRadius: 18,
-                offset: const Offset(0, 8),
+                color: cs.shadow.withValues(alpha: 0.08),
+                blurRadius: 24,
+                offset: const Offset(0, 10),
               ),
             ],
           ),

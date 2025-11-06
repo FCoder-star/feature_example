@@ -2,6 +2,7 @@ import 'package:feature_example/examples/pagination/pages/pagination_grid_page.d
 import 'package:feature_example/examples/pagination/pages/pagination_list_page.dart';
 import 'package:feature_example/examples/pagination/pages/pagination_masonry_page.dart';
 import 'package:feature_example/home/home_page.dart';
+import 'package:feature_example/widgets/app_page_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,8 +33,35 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const PaginationMasonryPage(),
     ),
   ],
-  errorBuilder: (context, state) => Scaffold(
-    appBar: AppBar(title: const Text('Not Found')),
-    body: Center(child: Text('Route not found: ${state.uri}')),
+  errorBuilder: (context, state) => Builder(
+    builder: (context) {
+      final scheme = Theme.of(context).colorScheme;
+      return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: const AppPageBar(
+          title: 'Not Found',
+          backgroundColor: Colors.transparent,
+        ),
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: RadialGradient(
+                    center: Alignment.topLeft,
+                    radius: 1.2,
+                    colors: [scheme.primary, scheme.secondary],
+                    stops: const [0.0, 1.0],
+                  ),
+                ),
+              ),
+            ),
+            SafeArea(
+              child: Center(child: Text('Route not found: ${state.uri}')),
+            ),
+          ],
+        ),
+      );
+    },
   ),
 );
