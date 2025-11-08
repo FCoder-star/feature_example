@@ -3,8 +3,8 @@ import 'package:feature_example/examples/pagination/data/app_item.dart';
 import 'package:feature_example/examples/pagination/data/fake_remote_api.dart';
 import 'package:feature_example/examples/pagination/list/core/paged_list.dart';
 import 'package:feature_example/examples/pagination/list/widgets/app_item_card.dart';
-import 'package:feature_example/widgets/app_page_bar.dart';
 import 'package:flutter/material.dart';
+
 
 class PaginationListPage extends StatefulWidget {
   const PaginationListPage({super.key});
@@ -21,12 +21,8 @@ class _PaginationListPageState extends State<PaginationListPage>
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const AppPageBar(
-        title: 'Pagination · List',
-      ),
+      appBar: AppBar(title: const Text('Pagination · List')),
       body: SafeArea(
         child: AppPagedList<int, AppItem>(
           controller: pagingController,

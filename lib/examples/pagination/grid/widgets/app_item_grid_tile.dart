@@ -21,20 +21,13 @@ class AppItemGridTile extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               cs.surface.withValues(alpha: 0.98),
-              cs.primary.withValues(alpha: 0.06),
+              cs.surfaceContainerHighest.withValues(alpha: 0.86),
             ],
           ),
           border: Border.all(
-            color: cs.outlineVariant.withValues(alpha: 0.75),
-            width: 1.1,
+            color: cs.outlineVariant.withValues(alpha: 0.5),
+            width: 1,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: cs.shadow.withValues(alpha: 0.08),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

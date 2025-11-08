@@ -21,21 +21,21 @@ class AppItemMasonryTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              cs.surface.withValues(alpha: 0.98),
-              cs.primary.withValues(alpha: 0.06),
+              cs.primaryContainer.withValues(alpha: 0.22),
+              cs.secondaryContainer.withValues(alpha: 0.18),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           border: Border.all(
-            color: cs.outlineVariant.withValues(alpha: 0.6),
-            width: 1.1,
+            color: cs.outlineVariant.withValues(alpha: 0.4),
+            width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
             ),
           ],
         ),

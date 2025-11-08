@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-import '../widgets/pagination_grid_widgets.dart';
+import '../../grid/widgets/pagination_grid_widgets.dart';
 
 class AppPagedGrid<PageKey, Item> extends StatelessWidget {
   const AppPagedGrid({

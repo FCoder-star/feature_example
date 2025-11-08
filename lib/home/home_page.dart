@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:feature_example/widgets/app_page_bar.dart';
 
 import '../router/app_routes.dart';
 
@@ -13,38 +12,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final entries = _demoEntries;
     final bg = Theme.of(context).colorScheme.surfaceContainerLowest;
-    final scheme = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: bg,
-      extendBodyBehindAppBar: true,
-      appBar: AppPageBar(
-        title: 'Feature Examples',
-        backgroundColor: Colors.transparent,
-      ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: RadialGradient(
-                  center: Alignment.topLeft,
-                  radius: 1.2,
-                  colors: [scheme.primary, scheme.secondary],
-                  stops: const [0.0, 1.0],
-                ),
-              ),
-            ),
-          ),
-          SafeArea(
-            child: ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: entries.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 16),
-              itemBuilder: (context, index) =>
-                  _ExampleCard(entry: entries[index]),
-            ),
-          ),
-        ],
+      appBar: AppBar(title: const Text('Feature Examples')),
+      body: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: entries.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 16),
+        itemBuilder: (context, index) => _ExampleCard(entry: entries[index]),
       ),
     );
   }
@@ -88,6 +63,14 @@ const _demoEntries = <ExampleEntry>[
     gradient: [Color(0xFFee0979), Color(0xFFff6a00)],
     routePath: AppRoutePaths.paginationMasonry,
   ),
+  ExampleEntry(
+    title: 'Dismissible · Swipe',
+    subtitle: 'Swipe to dismiss page with Hero animation',
+    icon: Icons.swipe_rounded,
+    gradient: [Color(0xFF667eea), Color(0xFF764ba2)],
+    routePath: AppRoutePaths.dismissibleDemo,
+  ),
+
 ];
 
 class _ExampleCard extends StatefulWidget {
