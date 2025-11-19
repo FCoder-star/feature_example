@@ -1,94 +1,114 @@
 # Feature Example (Flutter)
 
-一个围绕分页加载的 Flutter 示例集合项目，基于 `infinite_scroll_pagination` v5.1.1 与 `go_router` 实现。
+一个 Flutter 功能示例集合项目，展示常用的移动端交互模式与UI组件实现。
 
-包含三种布局的分页示例：
-- 列表 List（PagedListView）
-- 网格 Grid（PagedGridView）
-- 瀑布流 Masonry（PagedMasonryGridView）
+## 功能特性
 
-首页使用可配置的渐变卡片入口（带轻微动画）统一导航到各示例页。
+### 分页加载示例
+基于 `infinite_scroll_pagination` 实现的三种布局分页：
+- **列表 List** - PagedListView 实现
+- **网格 Grid** - PagedGridView 实现
+- **瀑布流 Masonry** - PagedMasonryGridView 实现
+
+### 图片交互示例
+- **Dismissible Page** - 微信朋友圈风格的图片拖动返回效果，支持多方向手势
+
+### Shimmer 骨架屏
+- 自定义 Shimmer 动画效果
+- 分页加载骨架屏占位组件
+
+### UI 设计
+- 科技感渐变背景主题
+- 玻璃态卡片设计
+- 动画渐变首页入口
 
 ---
 
-## 运行与环境
+## 运行环境
 
-依赖（见 `pubspec.yaml`）
-- Flutter SDK: >= 3.0（本项目 `environment.sdk` 为 `^3.9.2`）
-- go_router: ^14.x
-- infinite_scroll_pagination: ^5.1.1
+### 依赖要求
+- Flutter SDK: >= 3.0（项目使用 `^3.9.2`）
+- Dart SDK: 对应版本
 
-本地运行
+### 主要依赖包
+```yaml
+dependencies:
+  go_router: ^14.x              # 路由管理
+  infinite_scroll_pagination: ^5.1.1  # 分页加载
+  dismissible_page: ^1.0.2      # 拖动返回
+  shimmer: ^3.0.0               # 骨架屏动画
 ```
+
+### 本地运行
+```bash
 flutter pub get
 flutter run
 ```
 
 ---
 
-## 功能概览
-
-- 路由：使用 `go_router`，首页 → 三个分页示例，示例页返回回到首页
-  - 首页入口为 ListView 卡片，背景色跟随主题
-- 分页：抽象出 `IntPagingMixin<T>`，统一 `PagingController` 初始化与 `hasMore` 逻辑
-- 统一状态组件（List）：加载中、空态、错误（可重试）
-- Grid/Masonry 使用更紧凑的状态组件（尺寸适配网格子项）
-- Mock 数据：更接近商业场景（公司/品类/状态/价格/评分/时间等），且离线友好（图片失败有占位）
-
----
-
-## 目录结构
+## 项目结构
 
 ```
 lib/
-  main.dart                         // MaterialApp.router + go_router 挂载
-  router/app_routes.dart            // 路由常量与 GoRouter 配置
-  home/home_page.dart               // 首页（可配置的渐变卡片入口）
+  main.dart                         // 应用入口
+  router/app_routes.dart            // GoRouter 路由配置
+  home/home_page.dart               // 首页（动画渐变卡片入口）
 
-  examples/pagination/
-    core/
-      paged_list.dart              // 列表分页封装（PagingListener + PagedListView + RefreshIndicator）
-      paging_mixin.dart            // IntPagingMixin<T>，统一 pageSize / hasMore / controller
-      pagination_widgets.dart      // List 布局用的状态组件（加载/空态/错误）
+  shared/
+    widgets/tech_background.dart    // 通用科技感背景组件
 
-    data/
-      app_item.dart                // 示例数据模型
-      fake_remote_api.dart         // Mock 接口（确定性伪随机，离线友好）
+  examples/
+    pagination/                     // 分页加载示例
+      core/
+        paged_list.dart            // 列表分页封装
+        paging_mixin.dart          // 分页逻辑混入
+        pagination_widgets.dart    // 状态组件（加载/空态/错误）
+      data/
+        app_item.dart              // 数据模型
+        fake_remote_api.dart       // Mock 数据接口
+      grid/
+        core/paged_grid.dart       // 网格分页封装
+        widgets/                   // 网格项组件
+      masonry/
+        core/paged_masonry.dart    // 瀑布流分页封装
+        widgets/                   // 瀑布流项组件
+      list/
+        core/paged_list.dart       // 列表分页封装
+        widgets/                   // 列表项组件
+      pages/                       // 示例页面
+      widgets/
+        skeleton_theme.dart        // 骨架屏主题
 
-    grid/
-      core/paged_grid.dart         // Grid 封装（PagedGridView）
-      widgets/app_item_grid_tile.dart
-      widgets/pagination_grid_widgets.dart // Grid/Masonry 的状态组件（紧凑版）
+    dismissible/
+      pages/dismissible_demo_page.dart  // 图片拖动返回示例
 
-    masonry/
-      core/paged_masonry.dart      // Masonry 封装（PagedMasonryGridView.count/extent）
-      widgets/app_item_masonry_tile.dart   // 含随机高度与美化样式
-
-  examples/pages/
-    pagination_list_page.dart      // 列表示例页（使用 AppPagedList + AppItemCard）
-    pagination_grid_page.dart      // 网格示例页（使用 AppPagedGrid + AppItemGridTile）
-    pagination_masonry_page.dart   // 瀑布流示例页（使用 AppPagedMasonry + AppItemMasonryTile）
+    shimmer/
+      pages/shimmer_demo_page.dart      // Shimmer 效果示例
+      widgets/custom_shimmer.dart       // 自定义 Shimmer 组件
 ```
 
 ---
 
-## 路由说明
+## 路由配置
 
 文件：`lib/router/app_routes.dart`
-- `/`                      → 首页
-- `/examples/pagination/list`    → 列表分页示例
-- `/examples/pagination/grid`    → 网格分页示例
-- `/examples/pagination/masonry` → 瀑布流分页示例
 
-首页使用 `context.push(routePath)` 进入示例页；返回键将 `pop` 回首页。
-
-首页入口配置在：`lib/home/home_page.dart` 的 `_demoEntries` 列表，新增示例只需在此添加一项。
+| 路径 | 页面 |
+|------|------|
+| `/` | 首页 |
+| `/examples/pagination/list` | 列表分页示例 |
+| `/examples/pagination/grid` | 网格分页示例 |
+| `/examples/pagination/masonry` | 瀑布流分页示例 |
+| `/examples/dismissible` | 图片拖动返回示例 |
+| `/examples/shimmer` | Shimmer 骨架屏示例 |
 
 ---
 
-## 使用方式（示例）
+## 使用示例
 
-1) 在页面中混入分页 mixin（整数翻页）
+### 1. 分页混入使用
+
 ```dart
 class MyPageState extends State<MyPage> with IntPagingMixin<AppItem> {
   @override
@@ -97,7 +117,8 @@ class MyPageState extends State<MyPage> with IntPagingMixin<AppItem> {
 }
 ```
 
-2) 列表分页（List）
+### 2. 列表分页
+
 ```dart
 return AppPagedList<int, AppItem>(
   controller: pagingController,
@@ -106,7 +127,8 @@ return AppPagedList<int, AppItem>(
 );
 ```
 
-3) 网格分页（Grid）
+### 3. 网格分页
+
 ```dart
 return AppPagedGrid<int, AppItem>(
   controller: pagingController,
@@ -120,7 +142,8 @@ return AppPagedGrid<int, AppItem>(
 );
 ```
 
-4) 瀑布流分页（Masonry）
+### 4. 瀑布流分页
+
 ```dart
 return AppPagedMasonry<int, AppItem>.count(
   controller: pagingController,
@@ -131,34 +154,69 @@ return AppPagedMasonry<int, AppItem>.count(
 );
 ```
 
----
+### 5. 使用 TechScaffold 背景
 
-## 自定义与扩展
-
-- hasMore 规则：覆写 `computeHasMore`（`lib/examples/pagination/core/paging_mixin.dart`）
-  - 默认：`items.length >= pageSize` 表示还有下一页
-  - 若使用 total / cursor 协议，可在页面 State 中重写该方法
-
-- 状态组件：
-  - List 使用 `pagination_widgets.dart`
-  - Grid/Masonry 使用 `grid/widgets/pagination_grid_widgets.dart`
-  - 均可通过 AppPagedList/AppPagedGrid/AppPagedMasonry 的 `firstPage.../newPage.../noItems...` 参数按页覆盖
-
-- 离线与容错：
-  - 图片使用 `Image.network(..., errorBuilder: ...)`，网络失败时显示占位
-  - Mock 数据确定性生成，更接近商业项目
-
-- 新增示例：
-  - 新页面建议放在 `lib/examples/pages/` 下
-  - 对应功能代码放入 `lib/examples/<feature>/{core,data,widgets}`
-  - 在 `home_page.dart` 的 `_demoEntries` 新增入口即可
+```dart
+return TechScaffold(
+  title: '页面标题',
+  variant: TechBackgroundVariant.purple,
+  gradientColors: const [Color(0xFF8360c3), Color(0xFF2ebf91)],
+  body: YourContent(),
+);
+```
 
 ---
 
-## 已知事项
+## 自定义扩展
 
-- Masonry 示例的卡片高度为确定性“伪随机”，用于展示瀑布流效果，实际项目中请改为以内容高度为准
-- 若自定义 Grid/Masonry 的状态组件，请确保组件尺寸适配子项宽度，否则可能出现布局不协调
+### hasMore 判断逻辑
+覆写 `computeHasMore` 方法（`lib/examples/pagination/core/paging_mixin.dart`）：
+- 默认：`items.length >= pageSize` 表示还有下一页
+- 支持 total / cursor 协议扩展
+
+### 状态组件定制
+- List 布局：`pagination_widgets.dart`
+- Grid/Masonry 布局：`pagination_grid_widgets.dart`
+- 可通过 `firstPage.../newPage.../noItems...` 参数覆盖
+
+### 离线与容错
+- 图片使用 `errorBuilder` 处理加载失败
+- Mock 数据确定性生成，离线友好
+
+### 新增示例
+1. 在 `lib/examples/<feature>/` 下创建功能目录
+2. 添加 `{core, data, widgets, pages}` 子目录
+3. 在 `app_routes.dart` 添加路由
+4. 在 `home_page.dart` 的 `_demoEntries` 添加入口
+
+---
+
+## 设计规范
+
+### 颜色主题
+- 背景色：`#0F0F23`, `#1A1A3E`, `#0D1B2A`
+- 强调色：`#6366F1`, `#8B5CF6`
+- 卡片背景：白色 + elevation 阴影
+
+### 背景变体
+- `primary` - 深蓝紫渐变
+- `cyan` - 青色渐变
+- `purple` - 紫色渐变
+- `green` - 绿色渐变
+
+---
+
+## 注意事项
+
+- Masonry 示例的卡片高度为确定性伪随机，实际项目中应以内容高度为准
+- Grid/Masonry 自定义状态组件需确保尺寸适配子项宽度
+- 开发环境下 Dismissible 示例禁用了 SSL 证书验证，生产环境请移除
+
+---
+
+## 截图预览
+
+（可添加应用截图）
 
 ---
 
