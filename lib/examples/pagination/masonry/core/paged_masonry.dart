@@ -141,5 +141,3 @@ class AppPagedMasonry<PageKey, Item> extends StatelessWidget {
     );
   }
 }
-
-

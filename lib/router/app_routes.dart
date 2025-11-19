@@ -37,7 +37,6 @@ final GoRouter appRouter = GoRouter(
       path: AppRoutePaths.dismissibleDemo,
       builder: (context, state) => const DismissibleDemoPage(),
     ),
-
   ],
   errorBuilder: (context, state) => Scaffold(
     appBar: AppBar(title: const Text('Not Found')),

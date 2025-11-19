@@ -11,86 +11,78 @@ class AppItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cs = theme.colorScheme;
     final time = _formatTime(item.createdAt);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: InkWell(
-        onTap: onTap,
+      child: Material(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        child: Ink(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                cs.surface.withValues(alpha: 0.96),
-                cs.surfaceContainerHighest.withValues(alpha: 0.85),
-              ],
-            ),
-            border: Border.all(
-              color: cs.outlineVariant.withValues(alpha: 0.6),
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: cs.shadow.withValues(alpha: 0.05),
-                blurRadius: 18,
-                offset: const Offset(0, 8),
+        elevation: 4,
+        shadowColor: Colors.black.withValues(alpha: 0.15),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: Colors.grey.withValues(alpha: 0.2),
+                width: 1,
               ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _AvatarLarge(url: item.avatarUrl, text: item.id.toString()),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              item.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(14),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _AvatarLarge(url: item.avatarUrl, text: item.id.toString()),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                item.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF1A1A2E),
+                                ),
                               ),
                             ),
-                          ),
-                          IconButton(
-                            onPressed: onMore,
-                            icon: const Icon(Icons.more_horiz_rounded),
-                            tooltip: '更多',
-                            splashRadius: 20,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        item.subtitle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.textTheme.bodyMedium?.color?.withValues(
-                            alpha: 0.9,
+                            IconButton(
+                              onPressed: onMore,
+                              icon: Icon(
+                                Icons.more_horiz_rounded,
+                                color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
+                              ),
+                              tooltip: '更多',
+                              splashRadius: 20,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          item.subtitle,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: const Color(0xFF1A1A2E).withValues(alpha: 0.7),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      _Footer(extra: item.extra, time: time),
-                    ],
+                        const SizedBox(height: 10),
+                        _Footer(extra: item.extra, time: time),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -177,9 +169,18 @@ class _Footer extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.schedule_rounded, size: 14),
+            Icon(
+              Icons.schedule_rounded,
+              size: 14,
+              color: const Color(0xFF1A1A2E).withValues(alpha: 0.5),
+            ),
             const SizedBox(width: 4),
-            Text(time, style: theme.textTheme.labelMedium),
+            Text(
+              time,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: const Color(0xFF1A1A2E).withValues(alpha: 0.6),
+              ),
+            ),
           ],
         ),
       ],
@@ -194,24 +195,24 @@ class _Chip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cs = theme.colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(999),
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            cs.primaryContainer.withValues(alpha: 0.9),
-            cs.secondaryContainer.withValues(alpha: 0.9),
+            Color(0xFF6366F1),
+            Color(0xFF8B5CF6),
           ],
         ),
       ),
       child: Text(
         label,
         style: theme.textTheme.labelSmall?.copyWith(
-          color: cs.onPrimaryContainer,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );

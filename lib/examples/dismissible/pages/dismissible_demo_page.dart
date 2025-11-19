@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dismissible_page/dismissible_page.dart';
+import 'package:feature_example/shared/widgets/tech_background.dart';
 import 'package:flutter/material.dart';
 
 // 仅用于开发测试：自定义HttpOverrides禁用SSL证书验证
@@ -29,22 +30,22 @@ class _DismissibleDemoPageState extends State<DismissibleDemoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Dismissible Page · Demo')),
-      body: SafeArea(
-        child: GridView.builder(
-          padding: const EdgeInsets.all(8),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: 1,
-          ),
-          itemCount: 20,
-          itemBuilder: (context, index) {
-            return _ImageCard(index: index);
-          },
+    return TechScaffold(
+      title: 'Dismissible Page · Demo',
+      variant: TechBackgroundVariant.purple,
+      gradientColors: const [Color(0xFF667eea), Color(0xFF764ba2)],
+      body: GridView.builder(
+        padding: const EdgeInsets.all(8),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          childAspectRatio: 1,
         ),
+        itemCount: 20,
+        itemBuilder: (context, index) {
+          return _ImageCard(index: index);
+        },
       ),
     );
   }
@@ -63,9 +64,7 @@ class _ImageCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            context.pushTransparentRoute(
-              _DetailPage(index: index),
-            );
+            context.pushTransparentRoute(_DetailPage(index: index));
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
@@ -80,7 +79,7 @@ class _ImageCard extends StatelessWidget {
                     child: CircularProgressIndicator(
                       value: loadingProgress.expectedTotalBytes != null
                           ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
+                                loadingProgress.expectedTotalBytes!
                           : null,
                     ),
                   ),
@@ -127,7 +126,7 @@ class _DetailPage extends StatelessWidget {
                     color: Colors.white,
                     value: loadingProgress.expectedTotalBytes != null
                         ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
+                              loadingProgress.expectedTotalBytes!
                         : null,
                   ),
                 );
@@ -146,5 +145,3 @@ class _DetailPage extends StatelessWidget {
     );
   }
 }
-
-

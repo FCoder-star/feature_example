@@ -3,9 +3,9 @@ import 'package:feature_example/examples/pagination/data/app_item.dart';
 import 'package:feature_example/examples/pagination/data/fake_remote_api.dart';
 import 'package:feature_example/examples/pagination/grid/core/paged_grid.dart';
 import 'package:feature_example/examples/pagination/grid/widgets/app_item_grid_tile.dart';
+import 'package:feature_example/examples/pagination/grid/widgets/app_item_grid_tile_skeleton.dart';
+import 'package:feature_example/shared/widgets/tech_background.dart';
 import 'package:flutter/material.dart';
-
-
 
 class PaginationGridPage extends StatefulWidget {
   const PaginationGridPage({super.key});
@@ -22,20 +22,22 @@ class _PaginationGridPageState extends State<PaginationGridPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Pagination · Grid')),
-      body: SafeArea(
-        child: AppPagedGrid<int, AppItem>(
-          controller: pagingController,
-          padding: const EdgeInsets.all(8),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 3 / 4,
-          ),
-          itemBuilder: (context, item, index) => AppItemGridTile(item: item),
+    return TechScaffold(
+      title: 'Pagination · Grid',
+      variant: TechBackgroundVariant.purple,
+      gradientColors: const [Color(0xFF8360c3), Color(0xFF2ebf91)],
+      body: AppPagedGrid<int, AppItem>(
+        controller: pagingController,
+        padding: const EdgeInsets.all(8),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 3 / 4,
         ),
+        itemBuilder: (context, item, index) => AppItemGridTile(item: item),
+        firstPageProgressIndicatorBuilder: (context) =>
+            const AppItemGridSkeletonGrid(),
       ),
     );
   }
