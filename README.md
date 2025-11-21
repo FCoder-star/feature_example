@@ -1,5 +1,7 @@
 # Feature Example
 
+[English](./README_EN.md) | 简体中文
+
 日常开发中积累的 Flutter 功能示例，记录一些常见交互和组件的实现方案。
 
 ## 包含功能
