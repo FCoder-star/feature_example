@@ -3,7 +3,8 @@
     "allow": [
       "mcp__dart__analyze_files",
       "mcp__dart__add_roots",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
