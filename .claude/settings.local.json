@@ -5,9 +5,18 @@
       "mcp__dart__add_roots",
       "mcp__ide__getDiagnostics",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "mcp__deepwiki__read_wiki_structure",
+      "mcp__deepwiki__read_wiki_contents",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter analyze:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "codex"
+  ]
 }

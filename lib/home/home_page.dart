@@ -250,6 +250,13 @@ const _demoEntries = <ExampleEntry>[
     gradient: [Color(0xFF667eea), Color(0xFF764ba2)],
     routePath: AppRoutePaths.dismissibleDemo,
   ),
+  ExampleEntry(
+    title: 'Showcaseview',
+    subtitle: 'Interactive UI tutorials with step-by-step highlights',
+    icon: Icons.lightbulb_outline_rounded,
+    gradient: [Color(0xFF11998e), Color(0xFF38ef7d)],
+    routePath: AppRoutePaths.showcaseIndex,
+  ),
 ];
 
 class _ExampleCard extends StatefulWidget {

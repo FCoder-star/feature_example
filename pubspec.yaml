@@ -38,6 +38,7 @@ dependencies:
   go_router: ^14.2.0
   dismissible_page: ^1.0.2
   shimmer: ^3.0.0
+  showcaseview: ^5.0.1
 
 dev_dependencies:
   flutter_test:
